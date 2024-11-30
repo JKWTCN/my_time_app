@@ -15,7 +15,7 @@ class AllTimeTypeWidgetState extends State<AllTimeTypeWidget> {
   @override
   Widget build(BuildContext context) {
     return GridView(
-      gridDelegate: const SliverGridDelegateWithMaxCrossAxisExtent(
+      gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent(
         maxCrossAxisExtent: 115.0,
         childAspectRatio: 1.0, // 宽高比
       ),
