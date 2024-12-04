@@ -81,7 +81,7 @@ class _MyHomepageState extends State<MyHomepage> {
       home: Scaffold(
         appBar: AppBar(title: const Text('时间记录'), actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.add),
+            icon: const Icon(Icons.flip_to_front),
             onPressed: () {},
           ),
         ]),
