@@ -25,19 +25,36 @@ void finishTimeType(String guid) async {
       [nowTimeStamp(), guid]);
 }
 
+// 获取某个项目的所有时间记录
+Future<int> findTimeRecord(String guid) async {
+  num allTime = 0;
+  Database db = await createTable();
+  List<Map> lists = await db.rawQuery(
+      'SELECT * FROM time_record where guid=? order by id desc;', [guid]);
+  for (var item in lists) {
+    if (item["end"] != -1) {
+      allTime = item["end"] - item["start"] + allTime;
+    } else {
+      allTime = nowTimeStamp() - item["start"] + allTime;
+    }
+  }
+  return allTime.toInt();
+}
+// 
+
 // 添加正在进行
 Future<String> addTimeType(String imageGuid) async {
   Database db = await createTable();
   var uuid = const Uuid();
-  String now_uuid = uuid.v4();
+  String nowUuid = uuid.v4();
   await db.rawInsert(
       'INSERT INTO time_record ( id, guid, comment,type_guid ) VALUES ( NULL,?,?,? );',
-      [now_uuid, "", imageGuid]);
-  String interval_uuid = uuid.v4();
+      [nowUuid, "", imageGuid]);
+  String intervalUuid = uuid.v4();
   await db.rawInsert(
       "INSERT INTO time_intervals ( id, guid, [start], [end], interval_guid ) VALUES ( NULL, ?, ?, -1, ? );",
-      [interval_uuid, nowTimeStamp(), now_uuid]);
-  return now_uuid;
+      [intervalUuid, nowTimeStamp(), nowUuid]);
+  return nowUuid;
 }
 
 // 读取所有正在进行的
@@ -47,19 +64,19 @@ Future<List<Widget>> findAllNoWork(BuildContext context) async {
   List<Map> list =
       await db.rawQuery('SELECT * FROM time_intervals where end=-1;');
   for (var item in list) {
-    List<Map> time_all = await db.rawQuery(
+    List<Map> timeAll = await db.rawQuery(
         'SELECT * FROM time_record where guid=?;', [item["interval_guid"]]);
-    List<Map> type_time = await db.rawQuery(
+    List<Map> typeTime = await db.rawQuery(
         'SELECT * FROM time_type where imageGuid=?;',
-        [time_all[0]["type_guid"]]);
+        [timeAll[0]["type_guid"]]);
     result.add(ListTile(
       leading: await returnIconMaterial(
-          type_time[0]["imageGuid"],
-          type_time[0]["A"],
-          type_time[0]["R"],
-          type_time[0]["G"],
-          type_time[0]["B"]),
-      title: Text(type_time[0]["imageGuid"]),
+          typeTime[0]["imageGuid"],
+          typeTime[0]["A"],
+          typeTime[0]["R"],
+          typeTime[0]["G"],
+          typeTime[0]["B"]),
+      title: Text(typeTime[0]["imageGuid"]),
       subtitle: Text(timeLagNow(item["start"])),
       trailing: Row(
         mainAxisSize: MainAxisSize.min,
