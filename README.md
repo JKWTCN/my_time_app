@@ -1,16 +1,40 @@
 # my_time_app
 
-A new Flutter project.
+仿照IOS端aTimeLogger的一个记录个人时间的跨平台Flutter程序。
 
-## Getting Started
+## 功能简介
 
-This project is a starting point for a Flutter application.
+### **时间记录**
 
-A few resources to get you started if this is your first Flutter project:
+* **手动/自动记录**：支持手动添加时间片段，或通过快捷按钮快速启动/停止计时。
+* **多任务追踪**：可同时记录多个活动（如工作、学习、运动等），适合多线程任务管理。
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+### 活动分类管理
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* **自定义分类**：用户可创建个性化时间分类（如“工作”“阅读”“娱乐”），并设置颜色/图标标签。
+* **层级结构**：支持多级子分类（例如“运动→跑步”“运动→瑜伽”），细化时间统计维度。
+
+### 数据统计与可视化
+
+* **图表分析**：以饼图、柱状图等形式展示时间分布，直观呈现每日/周/月的时间使用比例。
+* **详细报告**：生成时间段内的汇总数据（如总时长、占比），支持按分类筛选对比。
+
+### 目标设定与提醒
+
+* **时间目标**：可为特定活动设定每日/周时间目标（如“每天学习2小时”），并通过进度条跟踪完成情况。
+* **习惯提醒**：设置周期性提醒，培养规律的时间分配习惯。
+
+### 多平台同步与备份
+
+* **数据导出**：支持导出 CSV/Excel 文件，便于深度分析或与其他工具（如 Excel、Notion）联动。
+
+### 隐私与便捷性
+
+* **离线使用**：无需联网即可记录数据，保障隐私安全。
+* **小组件支持**：在手机桌面快速启动计时或查看统计摘要。
+
+### 适用场景
+
+* **个人效率提升**：识别时间浪费，优化作息安排。
+* **项目管理**：追踪任务耗时，评估工作投入产出比。
+* **学习/运动打卡**：量化目标完成度，激励自律
